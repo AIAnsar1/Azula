@@ -1,0 +1,62 @@
+[package]
+name = "azula"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.13", features = ["derive", "wrap_help"] }
+colored = "2.2.0"
+async-std = "1.13.0"
+futures = "0.3"
+rlimit = "0.10.2"
+log = "0.4.22"
+env_logger = "0.11.5"
+anstream = "=0.6.18"
+dirs = "5.0.1"
+gcd = "2.0.1"
+rand = "0.8.5"
+colorful = "0.3.2"
+ansi_term = "0.12.1"
+toml = "0.8.19"
+serde = "1.0.124"
+serde_derive = "1.0.116"
+cidr-utils = "0.6.1"
+itertools = "0.13.0"
+hickory-resolver = { version = "0.24.2", features = ["dns-over-rustls"] }
+anyhow = "1.0.40"
+text_placeholder = { version = "0.5", features = ["struct_context"] }
+
+
+
+[dev-dependencies]
+parameterized = "2.0.0"
+wait-timeout = "0.2"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+
+
+[package.metadata.deb]
+depends = "$auto, nmap"
+section = "rust"
+
+[profile.release]
+lto = true
+panic = 'abort'
+strip = true
+
+
+[[bin]]
+name = "rustscan"
+path = "src/main.rs"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(tarpaulin_include)"] }
+
+[[bench]]
+name = "azula"
+harness = false
+
+
+
+
+
