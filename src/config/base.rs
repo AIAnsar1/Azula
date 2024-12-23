@@ -24,8 +24,8 @@ pub enum ScriptRequired {
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Eq)]
 pub struct PortRange {
-    pub start: u16,
-    pub end: u16
+    pub(crate)  start: u16,
+    pub(crate)  end: u16
 }
 
 
@@ -35,69 +35,69 @@ pub struct PortRange {
 #[allow(clippy::struct_excessive_bools)]
 pub struct Opts {
     #[arg(short, long, value_delimiter = ',')]
-    pub addresses: Vec<String>,
+    pub(crate)  addresses: Vec<String>,
     #[arg(short, long, value_delimiter = ',')]
-    pub ports: Option<Vec<u16>>,
+    pub(crate)  ports: Option<Vec<u16>>,
     #[arg(short, long, conflicts_with = "ports", value_parser = parse_range)]
-    pub range: Option<PortRange>,
+    pub(crate)  range: Option<PortRange>,
     #[arg(long, short)]
-    pub no_config: bool,
+    pub(crate)  no_config: bool,
     #[arg(long, short, value_parser)]
-    pub config_path: Option<PathBuf>,
+    pub(crate)  config_path: Option<PathBuf>,
     #[arg(long, short)]
-    pub greppable: bool,
+    pub(crate)  greppable: bool,
     #[arg(long)]
-    pub accessible: bool,
+    pub(crate)  accessible: bool,
     #[arg(long)]
-    pub resolver: Option<String>,
+    pub(crate)  resolver: Option<String>,
     #[arg(long, short, default_value = "4500")]
-    pub batch_size: u16,
+    pub(crate)  batch_size: u16,
     #[arg(long, short, default_value = "1500")]
-    pub timeout: u32,
+    pub(crate)  timeout: u32,
     #[arg(long, default_value = "1")]
-    pub tries: u8,
+    pub(crate)  tries: u8,
     #[arg(long, short)]
-    pub ulimit: Option<u64>,
+    pub(crate)  ulimit: Option<u64>,
     #[arg(long, value_enum, ignore_case = true, default_value = "serial")]
-    pub scan_order: ScanOrder,
+    pub(crate)  scan_order: ScanOrder,
     #[arg(long, value_enum, ignore_case = true, default_value = "default")]
-    pub scripts: ScriptRequired,
+    pub(crate)  scripts: ScriptRequired,
     #[arg(long)]
-    pub top: bool,
+    pub(crate)  top: bool,
     #[arg(last = true)]
-    pub command: Vec<String>,
+    pub(crate)  command: Vec<String>,
     #[arg(short, long, value_delimiter = ',')]
-    pub exclude_ports: Option<Vec<u16>>,
+    pub(crate)  exclude_ports: Option<Vec<u16>>,
     #[arg(long)]
-    pub udp: bool,
+    pub(crate)  udp: bool,
 }
 
 
 pub struct RangeIterator {
-    active: bool,
-    normalized_end: u32,
-    normalized_first_pick: u32,
-    normalized_pick: u32,
-    actual_start: u32,
-    step: u32,
+    pub(crate) active: bool,
+    pub(crate) normalized_end: u32,
+    pub(crate) normalized_first_pick: u32,
+    pub(crate) normalized_pick: u32,
+    pub(crate) actual_start: u32,
+    pub(crate) step: u32,
 }
 
 #[cfg(not(tarpaulin_include))]
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    address: Option<Vec<String>>,
-    ports: Option<HashMap<String, u16>>,
-    range: Option<PortRange>,
-    greppable: Option<bool>,
-    accessible: Option<bool>,
-    batch_size: Option<u16>,
-    timeout: Option<u32>,
-    tries: Option<u8>,
-    ulimit: Option<u64>,
-    resolver: Option<String>,
-    scan_order: Option<ScanOrder>,
-    command: Option<Vec<String>>,
-    scripts: Option<ScriptRequired>,
-    exclude_ports: Option<Vec<u16>>,
-    udp: Option<bool>,
+    pub(crate) address: Option<Vec<String>>,
+    pub(crate) ports: Option<HashMap<String, u16>>,
+    pub(crate) range: Option<PortRange>,
+    pub(crate) greppable: Option<bool>,
+    pub(crate) accessible: Option<bool>,
+    pub(crate) batch_size: Option<u16>,
+    pub(crate) timeout: Option<u32>,
+    pub(crate) tries: Option<u8>,
+    pub(crate) ulimit: Option<u64>,
+    pub(crate) resolver: Option<String>,
+    pub(crate) scan_order: Option<ScanOrder>,
+    pub(crate) command: Option<Vec<String>>,
+    pub(crate) scripts: Option<ScriptRequired>,
+    pub(crate) exclude_ports: Option<Vec<u16>>,
+    pub(crate) udp: Option<bool>,
 }

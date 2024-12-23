@@ -1,3 +1,5 @@
+use std::fs;
+use std::path::PathBuf;
 use crate::config::base::{Opts, PortRange, Config, LOWEST_PORT_NUMBER, TOP_PORT_NUMBER, ScanOrder, ScriptRequired};
 
 #[cfg(not(tarpaulin_include))]
@@ -30,8 +32,8 @@ impl Opts {
                 end: TOP_PORT_NUMBER,
             });
         }
+        opts
     }
-    opts
 
 
     pub fn merge(&mut self, config: &Config) {
@@ -44,7 +46,7 @@ impl Opts {
 
     fn merge_required(&mut self, config: &Config) {
         macro_rules! merge_required {
-            ($($field: ident), *) => {
+            ($($field: ident),*) => {
                 $(
                     if let Some(e) = &config.$field {
                         self.$field = e.clone();
@@ -106,5 +108,38 @@ impl Default for Opts {
 
 
 
+#[cfg(not(tarpaulin_include))]
+#[allow(clippy::doc_link_with_quotes)]
+#[allow(clippy::manual_unwrap_or_default)]
+impl Config {
+    pub fn read(custom_config_path: Option<PathBuf>) -> Self {
+        let mut content = String::new();
+        let config_path = custom_config_path.unwrap_or_else(default_config_path);
+
+        if config_path.exists() {
+            content = match fs::read_to_string(config_path) {
+                Ok(content) => content,
+                Err(_) => String::new(),
+            }
+        }
+
+        let config: Config = match toml::from_str(&content) {
+            Ok(content) => content,
+            Err(e) => {
+                println!("Found {e} in Configuration file.\nAborting Scan.\n");
+                std::process::exit(1);
+            }
+        };
+        config
+    }
+}
+
+pub fn default_config_path() -> PathBuf {
+    let Some(mut config_path) = dirs::home_dir() else {
+        panic!("Could Not Inter Config File Path.");
+    };
+    config_path.push(".azula.toml");
+    config_path
+}
 
 
