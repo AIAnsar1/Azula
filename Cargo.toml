@@ -47,7 +47,7 @@ strip = true
 
 
 [[bin]]
-name = "rustscan"
+name = "azula"
 path = "src/main.rs"
 
 [lints.rust]

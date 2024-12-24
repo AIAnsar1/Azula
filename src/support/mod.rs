@@ -1,2 +1,2 @@
 mod supports;
-mod generate;
+pub mod generate;

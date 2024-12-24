@@ -1,2 +1,2 @@
 pub mod configuration;
-pub(crate) mod base;
+pub mod base;

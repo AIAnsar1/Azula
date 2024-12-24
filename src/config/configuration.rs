@@ -1,5 +1,6 @@
 use std::fs;
 use std::path::PathBuf;
+use clap::Parser;
 use crate::config::base::{Opts, PortRange, Config, LOWEST_PORT_NUMBER, TOP_PORT_NUMBER, ScanOrder, ScriptRequired};
 
 #[cfg(not(tarpaulin_include))]
