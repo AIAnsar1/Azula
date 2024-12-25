@@ -39,11 +39,11 @@ pub struct PortRange {
 #[allow(clippy::struct_excessive_bools)]
 pub struct Opts {
     #[arg(short, long, value_delimiter = ',')]
-    pub(crate)  addresses: Vec<String>,
+    pub addresses: Vec<String>,
     #[arg(short, long, value_delimiter = ',')]
     pub(crate)  ports: Option<Vec<u16>>,
     #[arg(short, long, conflicts_with = "ports", value_parser = parse_range)]
-    pub(crate)  range: Option<PortRange>,
+    pub range: Option<PortRange>,
     #[arg(long, short)]
     pub(crate)  no_config: bool,
     #[arg(long, short, value_parser)]
@@ -51,25 +51,25 @@ pub struct Opts {
     #[arg(long, short)]
     pub greppable: bool,
     #[arg(long)]
-    pub(crate)  accessible: bool,
+    pub accessible: bool,
     #[arg(long)]
-    pub(crate)  resolver: Option<String>,
+    pub resolver: Option<String>,
     #[arg(long, short, default_value = "4500")]
     pub batch_size: u16,
     #[arg(long, short, default_value = "1500")]
-    pub(crate)  timeout: u32,
+    pub timeout: u32,
     #[arg(long, default_value = "1")]
     pub(crate)  tries: u8,
     #[arg(long, short)]
     pub ulimit: Option<u64>,
     #[arg(long, value_enum, ignore_case = true, default_value = "serial")]
-    pub(crate)  scan_order: ScanOrder,
+    pub scan_order: ScanOrder,
     #[arg(long, value_enum, ignore_case = true, default_value = "default")]
-    pub(crate)  scripts: ScriptRequired,
+    pub scripts: ScriptRequired,
     #[arg(long)]
     pub(crate)  top: bool,
     #[arg(last = true)]
-    pub(crate)  command: Vec<String>,
+    pub command: Vec<String>,
     #[arg(short, long, value_delimiter = ',')]
     pub(crate)  exclude_ports: Option<Vec<u16>>,
     #[arg(long)]
@@ -82,21 +82,22 @@ pub struct Opts {
 #[cfg(not(tarpaulin_include))]
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    pub(crate) address: Option<Vec<String>>,
-    pub(crate) ports: Option<HashMap<String, u16>>,
-    pub(crate) range: Option<PortRange>,
-    pub(crate) greppable: Option<bool>,
-    pub(crate) accessible: Option<bool>,
-    pub(crate) batch_size: Option<u16>,
-    pub(crate) timeout: Option<u32>,
-    pub(crate) tries: Option<u8>,
-    pub(crate) ulimit: Option<u64>,
-    pub(crate) resolver: Option<String>,
-    pub(crate) scan_order: Option<ScanOrder>,
-    pub(crate) command: Option<Vec<String>>,
-    pub(crate) scripts: Option<ScriptRequired>,
-    pub(crate) exclude_ports: Option<Vec<u16>>,
-    pub(crate) udp: Option<bool>,
+    pub address: Option<Vec<String>>,
+    pub ports: Option<HashMap<String, u16>>,
+    pub range: Option<PortRange>,
+    pub greppable: Option<bool>,
+    pub accessible: Option<bool>,
+    pub batch_size: Option<u16>,
+    pub timeout: Option<u32>,
+    pub tries: Option<u8>,
+    pub ulimit: Option<u64>,
+    pub resolver: Option<String>,
+    pub scan_order: Option<ScanOrder>,
+    pub command: Option<Vec<String>>,
+    pub scripts: Option<ScriptRequired>,
+    pub exclude_ports: Option<Vec<u16>>,
+    pub udp: Option<bool>,
+    pub addresses: Option<Vec<String>>,
 }
 
 

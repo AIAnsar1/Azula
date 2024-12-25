@@ -45,7 +45,7 @@ impl Opts {
     }
 
 
-    fn merge_required(&mut self, config: &Config) {
+    pub fn merge_required(&mut self, config: &Config) {
         macro_rules! merge_required {
             ($($field: ident),*) => {
                 $(
@@ -59,7 +59,7 @@ impl Opts {
     }
 
 
-    fn merge_options(&mut self, config: &Config) {
+    pub fn merge_optional(&mut self, config: &Config) {
         macro_rules! merge_optional {
             ($($field: ident),*) => {
                 $(

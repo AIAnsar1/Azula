@@ -165,7 +165,7 @@ fn get_resolver(resolver: &Option<String>) -> Resolver {
 }
 */
 
-fn get_resolver(resolver: &Option<String>) -> Resolver {
+pub fn get_resolver(resolver: &Option<String>) -> Resolver {
     match resolver {
         Some(R) => {
             let resolver_ips = read_resolver_from_file(R).unwrap_or_else(|_| {
