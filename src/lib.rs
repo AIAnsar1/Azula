@@ -1,7 +1,17 @@
-pub mod config;
-pub mod support;
+#![allow(clippy::needless_doctest_main)]
+
+pub mod tui;
+
+pub mod input;
+
 pub mod scanner;
-pub mod net;
+
+pub mod port;
+
 pub mod benchmark;
+
 pub mod scripts;
-pub mod main;
+
+pub mod address;
+
+pub mod generate;
